@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import StringField from "../Components/StringField";
 import SearchSelect from "../Components/SearchSelect";
 import { top100Films } from "../helpers/helpers";
+import CheckBoxField from "../Components/CheckBoxField";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function Home() {
       .required("First name is required"),
     email: yup.string().email("Invalid email address"),
     movie: yup.object().nullable().required("Movie is required"),
+    agree: yup.string().required("*Please check"),
   });
 
   const {
@@ -85,6 +87,14 @@ export default function Home() {
             name="movie"
             size="small"
             errors={errors}
+          />
+        </Box>
+        <Box className="p-2">
+          <CheckBoxField
+            control={control}
+            name={"agree"}
+            label={"I Understand"}
+            errors={!!errors.agree}
           />
         </Box>
         <Box className="mt-3">

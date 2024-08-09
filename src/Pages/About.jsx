@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import StringField from "../Components/StringField";
 import { toast } from "sonner";
+import CheckBoxField from "../Components/CheckBoxField";
 
 export default function About() {
   const naviagte = useNavigate();
@@ -32,13 +33,13 @@ export default function About() {
   };
 
   return (
-    <Box>
+    <Box sx={{ width: "150%" }}>
       <Typography
         sx={{ color: "#000080", fontWeight: "600", fontSize: "25px" }}
       >
         About Page
       </Typography>
-      <Box className="p-2" sx={{ width: "150%" }}>
+      <Box className="p-2">
         <StringField
           label="First Name"
           name="firstName"
@@ -50,6 +51,18 @@ export default function About() {
           }}
           required={"Required"}
           errors={errors}
+        />
+      </Box>
+      <Box className="p-2">
+        <CheckBoxField
+          label="I Understand"
+          name="agree"
+          control={control}
+          min={{
+            value: 1,
+            message: "*You must accept by clicking the checkbox.",
+          }}
+          required={"*You must accept by clicking the checkbox."}
         />
       </Box>
       <Box className="mt-2">
