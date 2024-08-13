@@ -1,15 +1,15 @@
 import React from "react";
-import "../App.css";
+import "./styles.css";
 import { Box, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import StringField from "../Components/StringField";
-import SearchSelect from "../Components/SearchSelect";
+import StringField from "../Common/InputFields/StringField";
+import SearchSelect from "../Common/InputFields/SearchSelect";
 import { top100Films } from "../helpers/helpers";
-import CheckBoxField from "../Components/CheckBoxField";
+import CheckBoxField from "../Common/InputFields/CheckBoxField";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ export default function Home() {
 
   return (
     <>
-      <Box sx={{ width: "150%" }}>
+      <Box sx={{ width: "20%", textAlign: "center" }}>
         <Box>
           <Typography>Hook Form</Typography>
           <i className="fas fa-heartbeat" />
