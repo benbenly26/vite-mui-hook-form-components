@@ -55,58 +55,68 @@ export default function Home() {
 
   return (
     <>
-      <Box sx={{ width: "20%", textAlign: "center" }}>
-        <Box>
-          <Typography>Hook Form</Typography>
-          <i className="fas fa-heartbeat" />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <Box sx={{ width: "20%", textAlign: "center" }}>
+          <Box>
+            <Typography>Hook Form</Typography>
+            <i className="fas fa-heartbeat" />
+          </Box>
+          <Box className="p-2">
+            <StringField
+              label="First Name"
+              name="firstName"
+              control={control}
+              size="small"
+              errors={errors}
+            />
+          </Box>
+          <Box className="p-2">
+            <StringField
+              type="email"
+              label="Email"
+              name="email"
+              control={control}
+              errors={errors}
+              size="small"
+            />
+          </Box>
+          <Box className="p-2">
+            <SearchSelect
+              label="Search Select"
+              control={control}
+              options={top100Films}
+              name="movie"
+              size="small"
+              errors={errors}
+            />
+          </Box>
+          <Box className="p-2">
+            <CheckBoxField
+              control={control}
+              name={"agree"}
+              label={"I Understand"}
+              errors={!!errors.agree}
+            />
+          </Box>
+          <Box className="mt-3">
+            <Button variant="outlined" onClick={handleSubmit(handleSave)}>
+              Save
+            </Button>
+          </Box>
         </Box>
-        <Box className="p-2">
-          <StringField
-            label="First Name"
-            name="firstName"
-            control={control}
-            size="small"
-            errors={errors}
-          />
-        </Box>
-        <Box className="p-2">
-          <StringField
-            type="email"
-            label="Email"
-            name="email"
-            control={control}
-            errors={errors}
-            size="small"
-          />
-        </Box>
-        <Box className="p-2">
-          <SearchSelect
-            label="Search Select"
-            control={control}
-            options={top100Films}
-            name="movie"
-            size="small"
-            errors={errors}
-          />
-        </Box>
-        <Box className="p-2">
-          <CheckBoxField
-            control={control}
-            name={"agree"}
-            label={"I Understand"}
-            errors={!!errors.agree}
-          />
-        </Box>
-        <Box className="mt-3">
-          <Button variant="outlined" onClick={handleSubmit(handleSave)}>
-            Save
+        <Box className="mt-5">
+          <Button variant="contained" onClick={handleNavigate}>
+            Next Page
           </Button>
         </Box>
-      </Box>
-      <Box className="mt-5">
-        <Button variant="contained" onClick={handleNavigate}>
-          Next Page
-        </Button>
       </Box>
     </>
   );
