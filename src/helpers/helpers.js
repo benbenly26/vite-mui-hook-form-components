@@ -29,3 +29,10 @@ export const switchData = {
   name: "Benly",
   is_active: 1,
 };
+
+export const genderValues = [
+  { label: "Male", value: 1 },
+  { label: "Fe-Male", value: 2 },
+  { label: "Bi-Sexual", value: 3 },
+  { label: "Other", value: 4 },
+];

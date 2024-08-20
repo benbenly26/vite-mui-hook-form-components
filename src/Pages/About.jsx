@@ -7,8 +7,9 @@ import StringField from "../Common/InputFields/StringField";
 import { toast } from "sonner";
 import CheckBoxField from "../Common/InputFields/CheckBoxField";
 import MulltiOrSingleSelect from "../Common/InputFields/MultiOrSingleSelect";
-import { accessOptions, switchData } from "../helpers/helpers";
+import { accessOptions, genderValues, switchData } from "../helpers/helpers";
 import Switch from "../Common/Switch/Switch";
+import SelectField from "../Common/InputFields/SelectField";
 
 export default function About() {
   const navigate = useNavigate();
@@ -121,6 +122,15 @@ export default function About() {
                 defaultChecked={switchData.is_active == 1}
                 onChange={(e) => handleSwitch(switchData.id, e.target.checked)}
               />
+              <Box sx={{ padding: "8px", width: "100%" }}>
+                <SelectField
+                  options={genderValues}
+                  control={control}
+                  label={"Gender"}
+                  name={"gender"}
+                  required={'Please'}
+                />
+              </Box>
             </Box>
           </Box>
           <Box

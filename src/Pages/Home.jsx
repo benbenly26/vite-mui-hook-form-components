@@ -8,8 +8,9 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import StringField from "../Common/InputFields/StringField";
 import SearchSelect from "../Common/InputFields/SearchSelect";
-import { top100Films } from "../helpers/helpers";
+import { genderValues, top100Films } from "../helpers/helpers";
 import CheckBoxField from "../Common/InputFields/CheckBoxField";
+import SelectField from "../Common/InputFields/SelectField";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ export default function Home() {
     email: yup.string().email("Invalid email address"),
     movie: yup.object().nullable().required("Movie is required"),
     agree: yup.string().required("*Please check"),
+    gender: yup.string().required("Please Select"),
   });
 
   const {
@@ -104,6 +106,15 @@ export default function Home() {
               name={"agree"}
               label={"I Understand"}
               errors={!!errors.agree}
+            />
+          </Box>
+          <Box className="p-2">
+            <SelectField
+              control={control}
+              options={genderValues}
+              name="gender"
+              label="Gender"
+              errors={errors}
             />
           </Box>
           <Box className="mt-3">
