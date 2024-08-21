@@ -10,6 +10,7 @@ import MulltiOrSingleSelect from "../Common/InputFields/MultiOrSingleSelect";
 import { accessOptions, genderValues, switchData } from "../helpers/helpers";
 import Switch from "../Common/Switch/Switch";
 import SelectField from "../Common/InputFields/SelectField";
+import DateField from "../Common/InputFields/DateField";
 
 export default function About() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function About() {
 
   const handleSave = (data) => {
     toast.success("Submitted");
-    const v = val.map((e) => e.value);
+    const v = val.map((e) => e.id);
     console.log("data", data, v);
     setVal("");
     reset();
@@ -128,8 +129,11 @@ export default function About() {
                   control={control}
                   label={"Gender"}
                   name={"gender"}
-                  required={'Please'}
+                  required={"Please"}
                 />
+              </Box>
+              <Box sx={{ padding: "8px", width: "100%" }}>
+                <DateField control={control} name={"dob"} required={"Please"} />
               </Box>
             </Box>
           </Box>

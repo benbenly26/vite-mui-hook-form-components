@@ -19,9 +19,9 @@ export const top100Films = [
 ];
 
 export const accessOptions = [
-  { id: 1, name: "Client" },
-  { id: 2, name: "Admin" },
-  { id: 3, name: "Both" },
+  { id: 7, name: "Client" },
+  { id: 8, name: "Admin" },
+  { id: 9, name: "Both" },
 ];
 
 export const switchData = {

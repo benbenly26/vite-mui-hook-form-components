@@ -11,6 +11,7 @@ import SearchSelect from "../Common/InputFields/SearchSelect";
 import { genderValues, top100Films } from "../helpers/helpers";
 import CheckBoxField from "../Common/InputFields/CheckBoxField";
 import SelectField from "../Common/InputFields/SelectField";
+import DateField from "../Common/InputFields/DateField";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -23,8 +24,11 @@ export default function Home() {
       .required("First name is required"),
     email: yup.string().email("Invalid email address"),
     movie: yup.object().nullable().required("Movie is required"),
-    agree: yup.string().required("*Please check"),
+    agree: yup.string().required("*Please Check"),
     gender: yup.string().required("Please Select"),
+    dob: yup
+      .string()
+      .required("Please Select i need to send you birthday cake"),
   });
 
   const {
@@ -70,6 +74,15 @@ export default function Home() {
           <Box>
             <Typography>Hook Form</Typography>
             <i className="fas fa-heartbeat" />
+          </Box>
+          <Box className="p-2">
+            <DateField
+              control={control}
+              name="dob"
+              errors={errors}
+              dateOnly={true}
+              minDate={false}
+            />
           </Box>
           <Box className="p-2">
             <StringField
