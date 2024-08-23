@@ -22,6 +22,12 @@ export default function Home() {
       .min(3, "First Name length is very short")
       .max(6, "First Name is large")
       .required("First name is required"),
+    phoneNumber: yup
+      .string()
+      .min(3, "Number is Short")
+      .max(6, "Number is large")
+      .required("Number is required")
+      .nullable(),
     email: yup.string().email("Invalid email address"),
     movie: yup.object().nullable().required("Movie is required"),
     agree: yup.string().required("*Please Check"),
@@ -88,6 +94,16 @@ export default function Home() {
             <StringField
               label="First Name"
               name="firstName"
+              control={control}
+              size="small"
+              errors={errors}
+            />
+          </Box>
+          <Box className="p-2">
+            <StringField
+              label="Phone Number"
+              name="phoneNumber"
+              type="number"
               control={control}
               size="small"
               errors={errors}
