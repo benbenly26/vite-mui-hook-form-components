@@ -12,6 +12,7 @@ import { genderValues, top100Films } from "../helpers/helpers";
 import CheckBoxField from "../Common/InputFields/CheckBoxField";
 import SelectField from "../Common/InputFields/SelectField";
 import DateField from "../Common/InputFields/DateField";
+import useDocumentTitle from "../Common/UseDocumentTitle";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -64,6 +65,8 @@ export default function Home() {
   const handleNavigate = () => {
     navigate("/About");
   };
+  // title change
+  useDocumentTitle("Review");
 
   return (
     <>
