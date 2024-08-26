@@ -1,22 +1,7 @@
 import React from "react";
 import { Controller } from "react-hook-form";
-import { TextField } from "@mui/material";
+import { TextField, Box } from "@mui/material";
 import { MdErrorOutline } from "react-icons/md";
-import { styled } from "@mui/material/styles";
-
-const NoArrowInput = styled(TextField)({
-  "& input[type=number]::-webkit-outer-spin-button, & input[type=number]::-webkit-inner-spin-button":
-    {
-      WebkitAppearance: "none",
-      margin: 0,
-    },
-  "& input[type=number]": {
-    MozAppearance: "textfield",
-  },
-  "& input[type=date]::-webkit-calendar-picker-indicator": {
-    display: "none",
-  },
-});
 
 const StringField = ({
   name,
@@ -32,7 +17,14 @@ const StringField = ({
   minLength,
   onChange,
   endAdornment = null,
+  currency = false,
+  readOnly,
+  placeholder = label,
 }) => {
+  // Determine if the special class is needed based on the input type
+  const inputClassName =
+    type === "number" || type === "date" ? "input-no-arrows" : "";
+
   return (
     <>
       <Controller
@@ -55,9 +47,10 @@ const StringField = ({
           },
         }}
         render={({ field }) => (
-          <NoArrowInput
+          <TextField
             {...field}
             label={label}
+            placeholder={!readOnly && placeholder}
             fullWidth
             size={size}
             error={errors ? !!errors[name] : false}
@@ -70,6 +63,7 @@ const StringField = ({
             }}
             required={!!required}
             type={type}
+            className={inputClassName}
             helperText={
               errors && errors[name] ? (
                 <span style={{ color: "red" }} className="d-flex">
@@ -84,6 +78,20 @@ const StringField = ({
               )
             }
             InputProps={{
+              disableUnderline: true,
+              readOnly: readOnly,
+              startAdornment: currency && (
+                <>
+                  {currency && (
+                    <Box
+                      className="d-flex flex-row"
+                      sx={{ padding: "0px 3px 4px" }}
+                    >
+                      $
+                    </Box>
+                  )}
+                </>
+              ),
               endAdornment: endAdornment && <>{endAdornment}</>,
             }}
           />

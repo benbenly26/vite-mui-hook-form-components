@@ -1,0 +1,16 @@
+/* Remove arrows from number input in WebKit browsers */
+.input-no-arrows input[type="number"]::-webkit-outer-spin-button,
+.input-no-arrows input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove arrows from number input in Firefox */
+.input-no-arrows input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Remove calendar icon from date input in WebKit browsers */
+.input-no-arrows input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
