@@ -52,7 +52,7 @@ const StringField = ({
             label={label}
             placeholder={!readOnly && placeholder}
             fullWidth
-            size={size}
+            size='small'
             error={errors ? !!errors[name] : false}
             variant={variant}
             onChange={(e) => {

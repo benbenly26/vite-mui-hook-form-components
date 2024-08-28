@@ -98,7 +98,6 @@ export default function Home() {
               label="First Name"
               name="firstName"
               control={control}
-              size="small"
               errors={errors}
             />
           </Box>
@@ -108,7 +107,6 @@ export default function Home() {
               name="phoneNumber"
               type="number"
               control={control}
-              size="small"
               errors={errors}
             />
           </Box>
@@ -119,7 +117,6 @@ export default function Home() {
               name="email"
               control={control}
               errors={errors}
-              size="small"
             />
           </Box>
           <Box className="p-2">
@@ -128,7 +125,6 @@ export default function Home() {
               control={control}
               options={top100Films}
               name="movie"
-              size="small"
               errors={errors}
             />
           </Box>

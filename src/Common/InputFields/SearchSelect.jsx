@@ -19,7 +19,7 @@ export default function SearchSelect({
       <Controller
         name={name}
         control={control}
-        rules={{ required: "req" }}
+        rules={{ required: required }}
         defaultValue={null}
         render={({ field }) => (
           <Autocomplete
@@ -32,7 +32,7 @@ export default function SearchSelect({
                 {...params}
                 label={label}
                 variant={variant}
-                size={size}
+                size='small'
                 error={errors ? !!errors[name] : false}
                 required={!!required}
                 helperText={
