@@ -7,7 +7,12 @@ import StringField from "../Common/InputFields/StringField";
 import { toast } from "sonner";
 import CheckBoxField from "../Common/InputFields/CheckBoxField";
 import MulltiOrSingleSelect from "../Common/InputFields/MultiOrSingleSelect";
-import { accessOptions, genderValues, switchData, top100Films } from "../helpers/helpers";
+import {
+  accessOptions,
+  genderValues,
+  switchData,
+  top100Films,
+} from "../helpers/helpers";
 import Switch from "../Common/Switch/Switch";
 import SelectField from "../Common/InputFields/SelectField";
 import DateField from "../Common/InputFields/DateField";
@@ -26,6 +31,7 @@ export default function About() {
     handleSubmit,
     reset,
     setValue,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {},
@@ -51,6 +57,7 @@ export default function About() {
       console.log("e", e);
     }
   };
+  console.log("watch()", watch("nameSelect"));
 
   return (
     <>
@@ -107,11 +114,23 @@ export default function About() {
                   errors={errors}
                   options={top100Films}
                   onChange={(e, v) => {
-                    setValue('nameSelect', v.value, {
+                    setValue("nameSelect", v.value, {
                       shouldDirty: true,
-                      shouldValidate: true
-                    })
+                      shouldValidate: true,
+                    });
                   }}
+                />
+              </Box>
+              <Box sx={{ padding: "8px", width: "100%" }}>
+                <SearchSelect
+                  label="Search Select"
+                  name="nameSelectNew"
+                  control={control}
+                  required={"Required mmbu"}
+                  errors={errors}
+                  options={top100Films.filter(
+                    (item) => item.value != watch("nameSelect.value")
+                  )}
                 />
               </Box>
               <Box sx={{ padding: "8px", width: "100%" }}>
