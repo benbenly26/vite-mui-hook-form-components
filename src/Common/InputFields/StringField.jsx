@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Controller } from "react-hook-form";
-import { TextField, Box } from "@mui/material";
+import { TextField, Box, IconButton } from "@mui/material";
 import { MdErrorOutline } from "react-icons/md";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const StringField = ({
   name,
@@ -20,10 +22,21 @@ const StringField = ({
   currency = false,
   readOnly,
   placeholder = label,
+  value,
+  setValue,
 }) => {
   // Determine if the special class is needed based on the input type
   const inputClassName =
     type === "number" || type === "date" ? "input-no-arrows" : "";
+
+  const [view, setView] = useState(false);
+  useEffect(() => {
+    if (typeof setValue == "function" && value) {
+      setValue(name, value, { shouldValidate: true });
+    }
+  }, [value]);
+
+  const inputType = type === "password" && view ? "text" : type;
 
   return (
     <>
@@ -52,7 +65,7 @@ const StringField = ({
             label={label}
             placeholder={!readOnly && placeholder}
             fullWidth
-            size='small'
+            size="small"
             error={errors ? !!errors[name] : false}
             variant={variant}
             onChange={(e) => {
@@ -62,7 +75,7 @@ const StringField = ({
               }
             }}
             required={!!required}
-            type={type}
+            type={inputType}
             className={inputClassName}
             helperText={
               errors && errors[name] ? (
@@ -92,7 +105,18 @@ const StringField = ({
                   )}
                 </>
               ),
-              endAdornment: endAdornment && <>{endAdornment}</>,
+              endAdornment: (endAdornment || type) && (
+                <>
+                  {type == "password" && (
+                    <>
+                      <IconButton onClick={() => setView(!view)}>
+                        {view ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                      </IconButton>
+                    </>
+                  )}
+                  {endAdornment}
+                </>
+              ),
             }}
           />
         )}

@@ -106,6 +106,20 @@ export default function About() {
                 />
               </Box>
               <Box sx={{ padding: "8px", width: "100%" }}>
+                <StringField
+                  label="Password"
+                  name="password"
+                  type="password"
+                  control={control}
+                  maxLength={{
+                    message: "Please enter the valid name",
+                    length: 10,
+                  }}
+                  required={"Required"}
+                  errors={errors}
+                />
+              </Box>
+              <Box sx={{ padding: "8px", width: "100%" }}>
                 <SearchSelect
                   label="Search Select"
                   name="nameSelect"
