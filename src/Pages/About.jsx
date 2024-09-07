@@ -1,6 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
-import { Box, Button, Typography, Paper, Container } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  Paper,
+  Container,
+  TextField,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import StringField from "../Common/InputFields/StringField";
@@ -17,11 +24,14 @@ import Switch from "../Common/Switch/Switch";
 import SelectField from "../Common/InputFields/SelectField";
 import DateField from "../Common/InputFields/DateField";
 import SearchSelect from "../Common/InputFields/SearchSelect";
+import { MdErrorOutline } from "react-icons/md";
 
 export default function About() {
   const navigate = useNavigate();
+  const [desErr, setDesErr] = useState(false);
   const [val, setVal] = useState({
     teamLead: "",
+    description: "",
   });
 
   const handleOnChange = (name, value) => {
@@ -30,6 +40,11 @@ export default function About() {
       [name]: value,
     }));
   };
+  useEffect(() => {
+    if (val.description.length > 3) {
+      setDesErr(false);
+    }
+  }, [val.description]);
 
   const {
     control,
@@ -44,16 +59,22 @@ export default function About() {
   console.log("errors", errors);
 
   const handleSave = async (data) => {
-    try {
-      const v = val.teamLead.map((e) => e.id);
-      console.log("data", data, v);
-      setVal({
-        teamLead: "",
-      });
-      toast.success("Submitted");
-      reset();
-    } catch (e) {
-      console.log("e", e);
+    if (val.description.length < 3) {
+      setDesErr(true);
+    }
+    if (val.description.length >= 3) {
+      try {
+        const v = val.teamLead.map((e) => e.id);
+        console.log("data", data, v, val.description);
+        setVal({
+          teamLead: "",
+          description: "",
+        });
+        toast.success("Submitted");
+        reset();
+      } catch (e) {
+        console.log("e", e);
+      }
     }
   };
 
@@ -204,6 +225,35 @@ export default function About() {
               </Box>
               <Box sx={{ padding: "8px", width: "100%" }}>
                 <DateField control={control} name={"dob"} required={"Please"} />
+              </Box>
+              <Box sx={{ padding: "8px", width: "100%" }}>
+                <Typography>Noraml Text Field</Typography>
+                <TextField
+                  className="w-100"
+                  size="small"
+                  label="Hey"
+                  placeholder="Type.."
+                  value={val.description}
+                  onChange={(e) =>
+                    handleOnChange("description", e.target.value)
+                  }
+                  error={desErr}
+                />
+                {desErr && (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <MdErrorOutline className="mx-1" style={{ color: "red" }} />
+                    <Typography
+                      sx={{ color: "red", fontSize: "13px !important" }}
+                    >
+                      Please enter
+                    </Typography>
+                  </Box>
+                )}
               </Box>
             </Box>
           </Box>
