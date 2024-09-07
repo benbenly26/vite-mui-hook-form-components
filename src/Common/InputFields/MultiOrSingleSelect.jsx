@@ -1,5 +1,6 @@
 import React from "react";
 import Select from "react-select";
+import makeAnimated from "react-select/animated";
 
 export default function MulltiOrSingleSelect({
   onChange,
@@ -55,6 +56,8 @@ export default function MulltiOrSingleSelect({
     }),
   };
 
+  const animatedComponents = makeAnimated();
+
   return (
     <>
       <Select
@@ -70,6 +73,7 @@ export default function MulltiOrSingleSelect({
         isDisabled={isDisabled}
         noOptionsMessage={noOptionsMessage}
         styles={customStyles}
+        components={animatedComponents}
       />
     </>
   );
