@@ -20,10 +20,15 @@ import SearchSelect from "../Common/InputFields/SearchSelect";
 
 export default function About() {
   const navigate = useNavigate();
-  const [val, setVal] = useState("");
+  const [val, setVal] = useState({
+    teamLead: "",
+  });
 
-  const handleOnChange = (name, selectedOption) => {
-    setVal(selectedOption);
+  const handleOnChange = (name, value) => {
+    setVal((preVal) => ({
+      ...preVal,
+      [name]: value,
+    }));
   };
 
   const {
@@ -38,12 +43,18 @@ export default function About() {
   });
   console.log("errors", errors);
 
-  const handleSave = (data) => {
-    toast.success("Submitted");
-    const v = val.map((e) => e.id);
-    console.log("data", data, v);
-    setVal("");
-    reset();
+  const handleSave = async (data) => {
+    try {
+      const v = val.teamLead.map((e) => e.id);
+      console.log("data", data, v);
+      setVal({
+        teamLead: "",
+      });
+      toast.success("Submitted");
+      reset();
+    } catch (e) {
+      console.log("e", e);
+    }
   };
 
   const handleBack = () => {
@@ -162,18 +173,26 @@ export default function About() {
               <Box sx={{ padding: "8px", width: "100%" }}>
                 <MulltiOrSingleSelect
                   options={accessOptions}
-                  value={val}
+                  value={val.teamLead}
                   keyValue="id"
                   keyLabel="name"
-                  onChange={(e) => handleOnChange("val", e)}
+                  onChange={(e) => handleOnChange("teamLead", e)}
                   isMulti={true}
                   placeholder="Select Here..."
                 />
               </Box>
-              <Switch
-                defaultChecked={switchData.is_active == 1}
-                onChange={(e) => handleSwitch(switchData.id, e.target.checked)}
-              />
+              <Box sx={{ padding: "8px", width: "100%" }}>
+                <Box className="d-flex align-items-center justify-content-center">
+                  <Typography>Switch me</Typography>
+                  <Switch
+                    defaultChecked={switchData.is_active == 1}
+                    onChange={(e) =>
+                      handleSwitch(switchData.id, e.target.checked)
+                    }
+                  />
+                </Box>
+              </Box>
+
               <Box sx={{ padding: "8px", width: "100%" }}>
                 <SelectField
                   options={genderValues}
