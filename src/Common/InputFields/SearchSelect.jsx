@@ -13,6 +13,9 @@ export default function SearchSelect({
   label,
   variant = "outlined",
   required,
+  onChange,
+  keyValue,
+  value,
 }) {
   return (
     <>
@@ -20,20 +23,21 @@ export default function SearchSelect({
         name={name}
         control={control}
         rules={{ required: required }}
-        defaultValue={null}
         render={({ field }) => (
           <Autocomplete
             {...field}
             options={options}
             getOptionLabel={(option) => option.label}
-            onChange={(_, data) => field.onChange(data)}
+            onChange={onChange}
+            value={field.value}
+            defaultValue={field.value}
             renderInput={(params) => (
               <TextField
                 {...params}
                 label={label}
                 variant={variant}
-                size='small'
-                error={errors ? !!errors[name] : false}
+                size="small"
+                error={!!errors[name]}
                 required={!!required}
                 helperText={
                   errors && errors[name] ? (

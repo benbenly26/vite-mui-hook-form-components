@@ -45,6 +45,7 @@ export default function Home() {
     reset,
     getValues,
     watch,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {},
@@ -67,6 +68,8 @@ export default function Home() {
   };
   // title change
   useDocumentTitle("Review");
+
+  console.log("watch", watch("movie"));
 
   return (
     <>
@@ -126,6 +129,14 @@ export default function Home() {
               options={top100Films}
               name="movie"
               errors={errors}
+              keyValue={"value"}
+              onChange={(e, v) => {
+                console.log("vvvv", v);
+                setValue("movie", v, {
+                  shouldDirty: true,
+                  shouldValidate: true,
+                });
+              }}
             />
           </Box>
           <Box className="p-2">

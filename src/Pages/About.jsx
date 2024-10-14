@@ -153,13 +153,15 @@ export default function About() {
               </Box>
               <Box sx={{ padding: "8px", width: "100%" }}>
                 <SearchSelect
-                  label="Search Select"
+                  label="Search Select One"
                   name="nameSelect"
                   control={control}
                   required={"Required mmbu"}
                   errors={errors}
                   options={top100Films}
+                  keyValue={"value"}
                   onChange={(e, v) => {
+                    console.log("vvvv", v);
                     setValue("nameSelect", v.value, {
                       shouldDirty: true,
                       shouldValidate: true,
@@ -175,8 +177,16 @@ export default function About() {
                   required={"Required mmbu"}
                   errors={errors}
                   options={top100Films.filter(
-                    (item) => item.value != watch("nameSelect.value")
+                    (item) => item.value != watch("nameSelect")
                   )}
+                  keyValue={"value"}
+                  onChange={(e, v) => {
+                    console.log("vvvv", v);
+                    setValue("nameSelectNew", v.value, {
+                      shouldDirty: true,
+                      shouldValidate: true,
+                    });
+                  }}
                 />
               </Box>
               <Box sx={{ padding: "8px", width: "100%" }}>
