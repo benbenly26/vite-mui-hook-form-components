@@ -31,7 +31,7 @@ export default function Home() {
       .required("Number is required")
       .nullable(),
     email: yup.string().email("Invalid email address"),
-    movie: yup.object().nullable().required("Movie is required"),
+    movie: yup.mixed().nullable().required("Movie is required"),
     agree: yup.string().required("*Please Check"),
     gender: yup.string().required("Please Select"),
     dob: yup
@@ -136,7 +136,7 @@ export default function Home() {
               keyValue={"value"}
               onChange={(e, v) => {
                 console.log("vvvv", v);
-                setValue("movie", v, {
+                setValue("movie", v.value, {
                   shouldDirty: true,
                   shouldValidate: true,
                 });

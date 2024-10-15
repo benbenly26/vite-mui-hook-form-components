@@ -3,6 +3,7 @@ import { Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { MdErrorOutline } from "react-icons/md";
+import { get } from "lodash";
 
 export default function SearchSelect({
   control,
@@ -29,7 +30,20 @@ export default function SearchSelect({
             options={options}
             getOptionLabel={(option) => option.label}
             onChange={onChange}
-            value={field.value}
+            value={
+              field.value != null
+                ? typeof field.value == "object"
+                  ? typeof field.value?.[0] != "object" &&
+                    field.value?.length > 0
+                    ? options?.filter((it) =>
+                        field.value?.includes(it[keyValue])
+                      )
+                    : field.value
+                  : options?.find(
+                      (option) => get(option, keyValue) == field.value
+                    )
+                : undefined
+            }
             defaultValue={field.value}
             renderInput={(params) => (
               <TextField
