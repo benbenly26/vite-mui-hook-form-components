@@ -25,6 +25,7 @@ import SelectField from "../Common/InputFields/SelectField";
 import DateField from "../Common/InputFields/DateField";
 import SearchSelect from "../Common/InputFields/SearchSelect";
 import { MdErrorOutline } from "react-icons/md";
+import { Each } from "../Common/InputFields/helpers";
 
 export default function About() {
   const navigate = useNavigate();
@@ -91,9 +92,32 @@ export default function About() {
   };
   console.log("watch()", watch("nameSelect"));
 
+  const valNew = [
+    {
+      name: "xxx",
+      age: "22",
+      year: "1999",
+    },
+    {
+      name: "yyy",
+      age: "12",
+      year: "6999",
+    },
+  ];
+
   return (
     <>
       <Container maxWidth="xl">
+        <Each
+          of={valNew}
+          render={(item) => {
+            return (
+              <div>
+                <h4>{item.year}</h4>
+              </div>
+            );
+          }}
+        />
         <Paper className="mt-2" sx={{ backgroundColor: "aliceblue" }}>
           <Typography
             sx={{
@@ -153,6 +177,7 @@ export default function About() {
               </Box>
               <Box sx={{ padding: "8px", width: "100%" }}>
                 <SearchSelect
+                  key={watch("nameSelect")}
                   label="Search Select One"
                   name="nameSelect"
                   control={control}
@@ -171,6 +196,7 @@ export default function About() {
               </Box>
               <Box sx={{ padding: "8px", width: "100%" }}>
                 <SearchSelect
+                  key={watch("nameSelectNew")}
                   label="Search Select"
                   name="nameSelectNew"
                   control={control}

@@ -13,6 +13,7 @@ import CheckBoxField from "../Common/InputFields/CheckBoxField";
 import SelectField from "../Common/InputFields/SelectField";
 import DateField from "../Common/InputFields/DateField";
 import useDocumentTitle from "../Common/UseDocumentTitle";
+import RadioField from "../Common/InputFields/RadioField";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -48,7 +49,9 @@ export default function Home() {
     setValue,
     formState: { errors },
   } = useForm({
-    defaultValues: {},
+    defaultValues: {
+      radio: 1,
+    },
     resolver: yupResolver(schema),
   });
 
@@ -62,7 +65,7 @@ export default function Home() {
       console.log(e);
     }
   };
-
+  console.log("getValues", getValues());
   const handleNavigate = () => {
     navigate("/About");
   };
@@ -124,6 +127,7 @@ export default function Home() {
           </Box>
           <Box className="p-2">
             <SearchSelect
+              key={watch("movie")}
               label="Search Select"
               control={control}
               options={top100Films}
@@ -154,6 +158,20 @@ export default function Home() {
               name="gender"
               label="Gender"
               errors={errors}
+            />
+          </Box>
+          <Box>
+            <RadioField
+              control={control}
+              name="radio"
+              onChange={(e, v) => {
+                console.log("v", v);
+                setValue("radio", v);
+              }}
+              radios={[
+                { label: "Home", value: "1" },
+                { label: "Office", value: "2" },
+              ]}
             />
           </Box>
           <Box className="mt-3">
