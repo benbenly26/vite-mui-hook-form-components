@@ -19,13 +19,13 @@ import {
   genderValues,
   switchData,
   top100Films,
-} from "../helpers/helpers";
+} from "../helpers/options";
 import Switch from "../Common/Switch/Switch";
 import SelectField from "../Common/InputFields/SelectField";
 import DateField from "../Common/InputFields/DateField";
 import SearchSelect from "../Common/InputFields/SearchSelect";
 import { MdErrorOutline } from "react-icons/md";
-import { Each } from "../Common/InputFields/helpers";
+import { Each } from "../helpers/utils";
 
 export default function About() {
   const navigate = useNavigate();

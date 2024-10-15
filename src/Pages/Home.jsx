@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import StringField from "../Common/InputFields/StringField";
 import SearchSelect from "../Common/InputFields/SearchSelect";
-import { genderValues, top100Films } from "../helpers/helpers";
+import { genderValues, top100Films } from "../helpers/options";
 import CheckBoxField from "../Common/InputFields/CheckBoxField";
 import SelectField from "../Common/InputFields/SelectField";
 import DateField from "../Common/InputFields/DateField";
