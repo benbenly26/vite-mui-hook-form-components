@@ -105,8 +105,7 @@ export default function Home() {
   // title change
   useDocumentTitle("Review");
 
-  console.log("nameOne", watch("nameOne"));
-  console.log("nameTwo", watch("nameTwo"));
+  console.log("movie", watch("movie"));
 
   return (
     <>
