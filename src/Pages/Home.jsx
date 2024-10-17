@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
 import { Box, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
@@ -14,9 +14,13 @@ import SelectField from "../Common/InputFields/SelectField";
 import DateField from "../Common/InputFields/DateField";
 import useDocumentTitle from "../Common/UseDocumentTitle";
 import RadioField from "../Common/InputFields/RadioField";
+import SwitchField from "../Common/InputFields/SwitchField";
+import Switch from "../Common/Switch/Switch";
 
 export default function Home() {
   const navigate = useNavigate();
+
+  const [isToggle, setIsToggle] = useState(false);
 
   const schema = yup.object().shape({
     firstName: yup
@@ -37,6 +41,23 @@ export default function Home() {
     dob: yup
       .string()
       .required("Please Select i need to send you birthday cake"),
+    password: yup.string().when("isValue", {
+      is: (isValue) => {
+        return isValue == 1;
+      },
+      then: () => yup.string().required("Please enter password"),
+      otherwise: () => yup.string().nullable(),
+    }),
+    nameOne: yup.string().when({
+      is: () => isToggle == 0,
+      then: () => yup.string().required("Please enter the Name One"),
+      otherwise: () => yup.string().nullable(),
+    }),
+    nameTwo: yup.string().when({
+      is: () => isToggle == 1,
+      then: () => yup.string().required("Please enter the Name Two"),
+      otherwise: () => yup.string().nullable(),
+    }),
   });
 
   const {
@@ -54,8 +75,9 @@ export default function Home() {
     },
     resolver: yupResolver(schema),
   });
-
+  console.log("getValues", getValues());
   console.log("errors", errors);
+
   const handleSave = async (data) => {
     try {
       toast.success("Happy Happy... 😁");
@@ -65,14 +87,26 @@ export default function Home() {
       console.log(e);
     }
   };
-  console.log("getValues", getValues());
+
+  const handelToogle = (checked) => {
+    setIsToggle(checked);
+    // when we use reset all the inputs will be reset only rest the nameOne and nameTwo so use setValue
+    if (checked) {
+      setValue("nameOne", "");
+    } else {
+      setValue("nameTwo", "");
+    }
+    console.log("checked", checked ? 1 : 0);
+  };
+
   const handleNavigate = () => {
     navigate("/About");
   };
   // title change
   useDocumentTitle("Review");
 
-  console.log("watch", watch("movie"));
+  console.log("nameOne", watch("nameOne"));
+  console.log("nameTwo", watch("nameTwo"));
 
   return (
     <>
@@ -83,6 +117,7 @@ export default function Home() {
           justifyContent: "center",
           alignItems: "center",
           height: "100vh",
+          paddingTop: "5%",
         }}
       >
         <Box sx={{ width: "20%", textAlign: "center" }}>
@@ -173,6 +208,40 @@ export default function Home() {
                 { label: "Office", value: "2" },
               ]}
             />
+          </Box>
+          <Box className="p-2">
+            <SwitchField control={control} name="isValue" />
+            {watch("isValue") == 1 && (
+              <StringField
+                control={control}
+                name={"password"}
+                type="password"
+                errors={errors}
+              />
+            )}
+          </Box>
+          <Box>
+            <Switch
+              checked={isToggle}
+              onChange={(e) => {
+                handelToogle(e?.target?.checked);
+              }}
+            />
+            {!isToggle ? (
+              <StringField
+                control={control}
+                name={"nameOne"}
+                label={"Name One"}
+                errors={errors}
+              />
+            ) : (
+              <StringField
+                control={control}
+                name={"nameTwo"}
+                label={"Name Two"}
+                errors={errors}
+              />
+            )}
           </Box>
           <Box className="mt-3">
             <Button variant="outlined" onClick={handleSubmit(handleSave)}>
