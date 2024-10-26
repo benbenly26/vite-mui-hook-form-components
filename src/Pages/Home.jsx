@@ -16,6 +16,7 @@ import useDocumentTitle from "../Common/UseDocumentTitle";
 import RadioField from "../Common/InputFields/RadioField";
 import SwitchField from "../Common/InputFields/SwitchField";
 import Switch from "../Common/Switch/Switch";
+import GruopBySelect from "../Common/InputFields/GroupBySelect";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ export default function Home() {
       then: () => yup.string().required("Please enter the Name Two"),
       otherwise: () => yup.string().nullable(),
     }),
+    groupSelect: yup.mixed().nullable().required("is required"),
   });
 
   const {
@@ -110,16 +112,15 @@ export default function Home() {
   return (
     <>
       <Box
+        className="mt-2"
         sx={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          height: "100vh",
-          paddingTop: "5%",
         }}
       >
-        <Box sx={{ width: "20%", textAlign: "center" }}>
+        <Box sx={{ textAlign: "center" }}>
           <Box>
             <Typography>Hook Form</Typography>
             <i className="fas fa-heartbeat" />
@@ -194,6 +195,24 @@ export default function Home() {
               errors={errors}
             />
           </Box>
+          <Box className="p-2">
+            <GruopBySelect
+              key={watch("groupSelect")}
+              control={control}
+              options={top100Films}
+              keyValue={"value"}
+              name={"groupSelect"}
+              label={"With categories.."}
+              onChange={(e, v) => {
+                console.log("vvvv", v);
+                setValue("groupSelect", v.value, {
+                  shouldDirty: true,
+                  shouldValidate: true,
+                });
+              }}
+              errors={errors}
+            />
+          </Box>
           <Box>
             <RadioField
               control={control}
@@ -254,6 +273,6 @@ export default function Home() {
           </Button>
         </Box>
       </Box>
-    </>
-  );
+    </>
+  );
 }
