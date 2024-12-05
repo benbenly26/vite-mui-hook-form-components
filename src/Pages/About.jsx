@@ -32,6 +32,7 @@ export default function About() {
   const [desErr, setDesErr] = useState(false);
   const [val, setVal] = useState({
     teamLead: "",
+    team: "",
     description: "",
   });
 
@@ -65,8 +66,9 @@ export default function About() {
     }
     if (val.description.length >= 3) {
       try {
-        const v = val.teamLead.map((e) => e.id);
-        console.log("data", data, v, val.description);
+        const v = val.teamLead.id;
+        const vv = val.team.map((e) => e.id);
+        console.log("data", data, v, vv, val.description);
         setVal({
           teamLead: "",
           description: "",
@@ -233,9 +235,41 @@ export default function About() {
                   value={val.teamLead}
                   keyValue="id"
                   keyLabel="name"
-                  onChange={(e) => handleOnChange("teamLead", e)}
-                  isMulti={true}
+                  onChange={(e) => {
+                    handleOnChange("teamLead", e);
+                  }}
+                  isMulti={false}
                   placeholder="Select Here..."
+                />
+                {/* 
+                1) when we use multi true value will be in [] when false {}
+                2) when array use map and pass the id to backend
+                3) when object just pass the id like this // const teamLeadId = val.teamLead.id;
+                */}
+              </Box>
+              <Box sx={{ padding: "8px", width: "100%" }}>
+                {/* 
+                1) when above data is in [] use option 1st
+                2) when false use normal filter
+                */}
+                <MulltiOrSingleSelect
+                  value={val.team}
+                  keyValue="id"
+                  keyLabel="name"
+                  onChange={(e) => {
+                    console.log("eee", e);
+                    handleOnChange("team", e);
+                  }}
+                  // options={accessOptions.filter((value) => {
+                  //   return (
+                  //     val.teamLead &&
+                  //     !val.teamLead.some((v) => v.id == value.id)
+                  //   );
+                  // })}
+                  options={accessOptions.filter(
+                    (item) => item.id != val.teamLead?.id
+                  )}
+                  isMulti={true}
                 />
               </Box>
               <Box sx={{ padding: "8px", width: "100%" }}>
