@@ -28,7 +28,7 @@ export default function SearchSelect({
           <Autocomplete
             {...field}
             options={options}
-            getOptionLabel={(option) => option.label}
+            getOptionLabel={(option) => option.label || option.name}
             onChange={onChange}
             value={
               field.value != null
