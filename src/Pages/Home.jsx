@@ -102,7 +102,7 @@ export default function Home() {
   };
 
   const handleNavigate = () => {
-    navigate("/About");
+    navigate("/about");
   };
   // title change
   useDocumentTitle("Review");
