@@ -204,7 +204,7 @@ export default function About() {
                   control={control}
                   required={"Required mmbu"}
                   errors={errors}
-                  options={top100Films.filter(
+                  options={top100Films?.filter(
                     (item) => item.value != watch("nameSelect")
                   )}
                   keyValue={"value"}
