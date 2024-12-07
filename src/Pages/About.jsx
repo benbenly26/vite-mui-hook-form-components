@@ -274,7 +274,7 @@ export default function About() {
               </Box>
               <Box sx={{ padding: "8px", width: "100%" }}>
                 <Box className="d-flex align-items-center justify-content-center">
-                  <Typography>Switch me</Typography>
+                  <Typography>Switch me*</Typography>
                   <Switch
                     defaultChecked={switchData.is_active == 1}
                     onChange={(e) =>
