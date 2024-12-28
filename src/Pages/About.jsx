@@ -115,7 +115,7 @@ export default function About() {
           render={(item) => {
             return (
               <div>
-                <h4>{item.year}</h4>
+                <h4>{item?.year}</h4>
               </div>
             );
           }}
